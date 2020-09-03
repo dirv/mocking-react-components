@@ -21,4 +21,15 @@ describe("BlogPage", () => {
     expect(PostContent).toHaveBeenCalledWith({ id: "top4" }, expect.anything())
     expect(PostContent).toHaveBeenCalledWith({ id: "top5" }, expect.anything())
   })
+
+  // NOTE: this test should replace the one above. it’s not necessary
+  // to have both tests since they test the same thing!
+  // You also need to ensure you set "clearMocks: true" in package.json
+  it("renders PostContent items in the right order", () => {
+    render(<TopFivePostsPage />)
+    const postContentIds = PostContent.mock.calls.map(args => args[0].id)
+    expect(postContentIds).toEqual([
+      "top1", "top2", "top3", "top4", "top5"
+    ])
+  })
 })

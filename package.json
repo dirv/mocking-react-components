@@ -24,6 +24,7 @@
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     },
-    "setupFilesAfterEnv": ["./jest.setup.js"]
+    "setupFilesAfterEnv": ["./jest.setup.js"],
+    "clearMocks": true
   }
 }
