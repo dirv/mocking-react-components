@@ -13,10 +13,9 @@ export const BlogPage = ({ url }) => {
   };
 
   return (
-    <>
-      <PostContent id={id} />
+    <PostContent id={id}>
       <input type="email" placeholder="Sign up to my mailing list!" />
       <button onClick={handleSignUp}>Sign up</button>
-    </>
+    </PostContent>
   )
 }

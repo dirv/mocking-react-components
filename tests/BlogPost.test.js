@@ -4,7 +4,7 @@ import { BlogPage } from "../src/BlogPage";
 import { screen, render } from "@testing-library/react";
 
 jest.mock("../src/PostContent", () => ({
-  PostContent: jest.fn(() => <div data-testid="PostContent" />)
+  PostContent: jest.fn(({ children }) => <div data-testid="PostContent">{children}</div>)
 }))
 
 describe("BlogPage", () => {
@@ -17,7 +17,18 @@ describe("BlogPage", () => {
     const postId = "my-amazing-post"
     render(<BlogPage url={`http://example.com/blog/${postId}`} />)
     expect(PostContent).toHaveBeenCalledWith(
-      { id: postId },
+      expect.objectContaining(
+        { id: postId }),
       expect.anything())
+  })
+
+  it("renders the mailing list sign up button within the PostContent", () => {
+    render(<BlogPage url="http://example.com/blog/my-web-page" />)
+
+    const postContentElement = screen.getByTestId("PostContent")
+
+    const button = screen.queryByRole("button", { name: "Sign up" })
+
+    expect(postContentElement).toContainElement(button)
   })
 })
